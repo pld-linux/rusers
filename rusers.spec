@@ -1,11 +1,11 @@
 Summary:	Displays the users logged into machines on the local network.
 Name:		rusers
-Version:	0.16
-Release:	5
+Version:	0.17
+Release:	0
 Copyright:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
-Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	rusersd.init
 Source2:	rstatd.init
 Source3:	rstatd.tar.gz
