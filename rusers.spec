@@ -1,7 +1,7 @@
 Summary:	Displays the users logged into machines on the local network.
 Name:		rusers
 Version:	0.10
-Release:	24
+Release:	25
 Copyright:	BSD
 Group:		System Environment/Daemons
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
