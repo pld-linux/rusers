@@ -12,20 +12,20 @@
 . /etc/sysconfig/network
 
 # Check that networking is up.
-if [ ${NETWORKING} = "no" ]
-then
-	exit 0
+if is_no "${NETWORKING}"; then
+	msg_Network_Down rusersd
+	exit 1
 fi
 
 # See how we were called.
 case "$1" in
   start)
-	show "Starting rusers services"
+	msg_starting rusers
 	daemon rpc.rusersd
 	touch /var/lock/subsys/rusersd
 	;;
   stop)
-	show "Stopping rusers services"
+	msg_stopping rusers
 	killproc rpc.rusersd
 	rm -f /var/lock/subsys/rusersd
 	;;
@@ -37,7 +37,7 @@ case "$1" in
 	$0 start
 	;;
   *)
-	echo "Usage: rusersd {start|stop|status|restart}"
+	msg_Usage "$0 {start|stop|status|restart}"
 	exit 1
 esac
 
