@@ -12,6 +12,7 @@ Patch0:		netkit-rusers-0.10-misc.patch
 Patch1:		rusers-0.10-maint.patch
 Patch2:		netkit-rusers-install.patch
 Prereq:		/sbin/chkconfig
+Requires:	rc-scripts
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
