@@ -7,7 +7,7 @@ Summary(pt_BR):	Mostra a informação de login para máquinas remotas
 Summary(tr):	Að üzerindeki makinalardaki kullanýcýlarý sorgular
 Name:		rusers
 Version:	0.17
-Release:	13
+Release:	14
 License:	BSD
 Group:		Networking
 Group(de):	Netzwerkwesen
@@ -34,7 +34,6 @@ Mit Hilfe des rusers-Server und Client (beide Teil dieses Pakets) kann
 man herausfinden, welche Benutzer an welchen Rechnern im lokalen
 Netwerk angemeldet sind.
 
-%description -l es
 %description -l fr
 Le client et le serveur rusers, tous deux inclus dans ce package,
 permettent aux utilisateurs de trouver quels utilisateurs sont
@@ -73,13 +72,13 @@ Prereq:		rc-scripts
 The rusersd package contains the server for responding to rusers
 requests.
 
-%description -l pt_BR -n rusersd
+%description -n rusersd -l pt_BR
 Servidor para o protocolo rusers.
 
 %description -n rusersd -l pl
 Pakiet rusersd zawiera serwer odpowiadaj±cy na zapytania rusers.
 
-%description -l es -n rusersd
+%description -n rusersd -l es
 El servidor rusers incluido en este paquete, permiten ver cual de los
 usuarios están "logados" en otras máquinas de la red.
 
@@ -112,7 +111,7 @@ Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Prereq:		/sbin/chkconfig
-Requires:	rc-scripts
+Prereq:		rc-scripts
 
 %description -n rstatd
 rpc.rstatd is a server which returns performance statistics obtained
@@ -169,7 +168,7 @@ else
 	echo "Type \"/etc/rc.d/init.d/rusersd start\" to start rusersd server" 1>&2
 fi
 	
-%postun -n rusersd
+%preun -n rusersd
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/rusersd ]; then
 		/etc/rc.d/init.d/rusersd stop 1>&2
@@ -185,7 +184,7 @@ else
 	echo "Type \"/etc/rc.d/init.d/rstatd start\" to start rstatd server" 1>&2
 fi
 	
-%postun -n rstatd
+%preun -n rstatd
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/rstatd ]; then
 		/etc/rc.d/init.d/rstatd stop 1>&2
