@@ -1,16 +1,15 @@
 Summary:	Displays the users logged into machines on the local network.
 Name:		rusers
-Version:	0.10
-Release:	25
+Version:	0.16
+Release:	5
 Copyright:	BSD
 Group:		System Environment/Daemons
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
 Source1:	rusersd.init
 Source2:	rstatd.init
 Source3:	rstatd.tar.gz
-Patch0:		netkit-rusers-0.10-misc.patch
-Patch1:		rusers-0.10-maint.patch
-Patch2:		netkit-rusers-install.patch
+Patch0:		netkit-rusers-numusers.patch
+Patch1:		rstatd-jbj.patch
 Prereq:		/sbin/chkconfig
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -25,14 +24,15 @@ Install rusers if you need to keep track of who is logged into your
 local network.
 
 %prep
-%setup -q -n netkit-rusers-0.10 -a3
+%setup -q -n netkit-rusers-%{version} -a3
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
-%{__make}
-%{__make} -C rpc.rstatd
+./configure
+
+%{__make} CFLAGS="$RPM_OPT_FLAGS -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
+%{__make} CFLAGS="$RPM_OPT_FLAGS" -C rpc.rstatd
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -40,12 +40,20 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8}}
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 
 %{__make} install \
-	INSTALLROOT=$RPM_BUILD_ROOT
+	INSTALLROOT=$RPM_BUILD_ROOT \
+	MANDIR=%{_mandir}
+
 %{__make} install install -C rpc.rstatd \
-	INSTALLROOT=$RPM_BUILD_ROOT
+	INSTALLROOT=$RPM_BUILD_ROOT \
+	MANDIR=%{_mandir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/rusersd
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/rstatd
+
+rm -f $RPM_BUILD_ROOT%{_mandir}/man8/{rstatd,rusersd}.8
+
+echo ".so rpc.rstatd.8" > $RPM_BUILD_ROOT%{_mandir}/man8/rstatd.8
+echo ".so rpc.rusersd.8" > $RPM_BUILD_ROOT%{_mandir}/man8/rusersd.8
 
 strip --strip-unneeded $RPM_BUILD_ROOT{%{_bindir},%{_sbindir}}/* || :
 
@@ -76,4 +84,5 @@ fi
 %{_mandir}/man1/rusers.1*
 %{_mandir}/man8/rpc.rstatd.8*
 %{_mandir}/man8/rpc.rusersd.8*
+%{_mandir}/man8/rstatd.8*
 %{_mandir}/man8/rusersd.8*
