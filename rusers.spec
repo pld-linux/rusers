@@ -18,7 +18,7 @@ Source3:	rstatd.tar.gz
 # Source3-md5:	75c1f4b3df318cf509593af1ee1d52e5
 Patch0:		netkit-%{name}-numusers.patch
 Patch1:		rstatd-jbj.patch
-Buildrequires:	procps-devel >= 3.1.11
+BuildRequires:	procps-devel >= 3.1.11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
