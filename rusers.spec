@@ -1,7 +1,7 @@
 Summary:	Displays the users logged into machines on the local network.
 Name:		rusers
 Version:	0.17
-Release:	1
+Release:	2
 Copyright:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
@@ -12,6 +12,7 @@ Source3:	rstatd.tar.gz
 Patch0:		netkit-rusers-numusers.patch
 Patch1:		rstatd-jbj.patch
 Prereq:		/sbin/chkconfig
+BuildRequires:	procps >= 2.0.7
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
