@@ -46,7 +46,7 @@ Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Obsoletes:	rusers-server
 Prereq:		/sbin/chkconfig
-Requires:	rc-scripts
+Prereq:			rc-scripts
 
 %description -n rusersd
 machines on the local network. The rusersd package contains the server
