@@ -1,15 +1,16 @@
-Summary:	Displays the users logged into machines on the local network.
+Summary:	Displays the users logged into machines on the local network
 Name:		rusers
 Version:	0.17
 Release:	2
-Copyright:	BSD
+License:	BSD
 Group:		Networking/Daemons
+Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
-Source1:	rusersd.init
+Source1:	%{name}d.init
 Source2:	rstatd.init
 Source3:	rstatd.tar.gz
-Patch0:		netkit-rusers-numusers.patch
+Patch0:		netkit-%{name}-numusers.patch
 Patch1:		rstatd-jbj.patch
 Prereq:		/sbin/chkconfig
 BuildRequires:	procps >= 2.0.7
@@ -17,10 +18,10 @@ Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-The rusers program allows users to find out who is logged into
-various machines on the local network.  The rusers command produces
-output similar to who, but for the specified list of hosts or for
-all machines on the local network.
+The rusers program allows users to find out who is logged into various
+machines on the local network. The rusers command produces output
+similar to who, but for the specified list of hosts or for all
+machines on the local network.
 
 Install rusers if you need to keep track of who is logged into your
 local network.
@@ -33,13 +34,13 @@ local network.
 %build
 ./configure
 
-%{__make} CFLAGS="$RPM_OPT_FLAGS -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
-%{__make} CFLAGS="$RPM_OPT_FLAGS" -C rpc.rstatd
+%{__make} CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O -g} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
+%{__make} CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O -g}" -C rpc.rstatd
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8}}
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8}} \
+	$RPM_BUILD_ROOT/etc/rc.d/init.d
 
 %{__make} install \
 	INSTALLROOT=$RPM_BUILD_ROOT \
@@ -56,10 +57,6 @@ rm -f $RPM_BUILD_ROOT%{_mandir}/man8/{rstatd,rusersd}.8
 
 echo ".so rpc.rstatd.8" > $RPM_BUILD_ROOT%{_mandir}/man8/rstatd.8
 echo ".so rpc.rusersd.8" > $RPM_BUILD_ROOT%{_mandir}/man8/rusersd.8
-
-strip --strip-unneeded $RPM_BUILD_ROOT{%{_bindir},%{_sbindir}}/* || :
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man{1,8}/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
