@@ -5,11 +5,13 @@ Summary(pl):	Wy¶wietla listê u¿ytkowników zalogowanych na komputerach w sieci lo
 Summary(tr):	Að üzerindeki makinalardaki kullanýcýlarý sorgular
 Name:		rusers
 Version:	0.17
-Release:	7
+Release:	8
 License:	BSD
 Group:		Networking
 Group(de):	Netzwerkwesen
+Group(es):	Red
 Group(pl):	Sieciowe
+Group(pt_BR):	Rede
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	%{name}d.init
 Source2:	rstatd.init
@@ -35,6 +37,12 @@ Le client et le serveur rusers, tous deux inclus dans ce package,
 permettent aux utilisateurs de trouver quels utilisateurs sont
 connectés sur les différentes machines du réseau local.
 
+%description -l pl
+Program rusers pozwala u¿ytkownikom sprawdziæ kto jest zalogowany na
+ró¿nych maszynach w sieci lokalnej. Wynik komendy rusers jest podobne
+do komendy who, ale dla okre¶lonej listy komputerów lub wszystkich
+maszyn z sieci lokalnej.
+
 %description -l tr
 Bu pakette yer alan rusers sunucusu ve istemcisi ile bir kullanýcý að
 üzerinde bu hizmeti sunan diðer makinalardaki kullanýcýlarý
@@ -51,15 +59,20 @@ Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts
 
 %description -n rusersd
-machines on the local network. The rusersd package contains the server
-for responding to rusers requests.
+The rusersd package contains the server for responding to rusers
+requests.
+
+%description -n rusersd -l pl
+Pakiet rusersd zawiera serwer odpowiadaj±cy na zapytania rusers.
 
 %package -n rup
 Summary:	rstatd client
 Summary(pl):	Klient rstatd
 Group:		Networking
 Group(de):	Netzwerkwesen
+Group(es):	Red
 Group(pl):	Sieciowe
+Group(pt_BR):	Rede
 
 %description -n rup
 rup displays a summary of the current system status of a particular
@@ -67,6 +80,12 @@ host or all hosts on the local network. The output shows the current
 time of day, how long the system has been up, and the load averages.
 The load average numbers give the number of jobs in the run queue
 averaged over 1, 5 and 15 minutes.
+
+%description -n rup -l pl
+rup wy¶wietla podsumowanie aktualnego stanu systemu dla okre¶lonego
+komputera lub wszystkich z sieci lokalnej. Wyj¶cie zawiera aktualny
+czas, jak d³ugo system jest w³±czony i obci±¿enie. Obci±¿enie podawane
+jest jako ilo¶æ procesów w kolejce ¶rednio w 1, 5 i 15 minut.
 
 %package -n rstatd
 Summary:	kernel statistics server
@@ -81,6 +100,10 @@ Requires:	rc-scripts
 rpc.rstatd is a server which returns performance statistics obtained
 from the kernel. These statistics are usually read using the rup(1)
 command.
+
+%description -n rstatd -l pl
+rpc.rstatd to serwer podaj±cy statystyki wydajno¶ci pobrane od j±dra.
+Statystyki te zwykle s± czytane komend± rup(1).
 
 %prep
 %setup -q -n netkit-rusers-%{version} -a3
@@ -144,7 +167,7 @@ else
 	echo "Type \"/etc/rc.d/init.d/rstatd start\" to start rstatd server" 1>&2
 fi
 	
-%postun
+%postun -n rstatd
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/rstatd ]; then
 		/etc/rc.d/init.d/rstatd stop 1>&2
