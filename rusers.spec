@@ -60,9 +60,9 @@ Summary(es):	El servidor rusers
 Summary(pl):	Serwer protoko³u rusers
 Summary(pt_BR):	Servidor para o protocolo rusers
 Group:		Networking/Daemons
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 Obsoletes:	rusers-server
-Prereq:		/sbin/chkconfig
-Prereq:		rc-scripts
 
 %description -n rusersd
 The rusersd package contains the server for responding to rusers
@@ -100,8 +100,8 @@ jest jako ilo¶æ procesów w kolejce ¶rednio w 1, 5 i 15 minut.
 Summary:	kernel statistics server
 Summary(pl):	Serwer rstatd
 Group:		Networking/Daemons
-Prereq:		/sbin/chkconfig
-Prereq:		rc-scripts
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 
 %description -n rstatd
 rpc.rstatd is a server which returns performance statistics obtained
