@@ -1,6 +1,7 @@
 Summary:	Displays the users logged into machines on the local network
 Summary(de):	Anzeige von Login-Infos für entfernte Computer
 Summary(fr):	Affiche des informations de login pour les machines distantes
+Summary(pl):	Wy¶wietla listê u¿ytkowników zalogowanych na komputerach w sieci lokalnej
 Summary(tr):	Að üzerindeki makinalardaki kullanýcýlarý sorgular
 Name:		rusers
 Version:	0.17
@@ -41,12 +42,13 @@ sorgulayabilir.
 
 %package -n rusersd
 Summary:	Server for the rusers protocol
+Summary(pl):	Serwer protoko³u rusers
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
 Obsoletes:	rusers-server
 Prereq:		/sbin/chkconfig
-Prereq:			rc-scripts
+Prereq:		rc-scripts
 
 %description -n rusersd
 machines on the local network. The rusersd package contains the server
@@ -54,6 +56,7 @@ for responding to rusers requests.
 
 %package -n rup
 Summary:	rstatd client
+Summary(pl):	Klient rstatd
 Group:		Networking
 Group(de):	Netzwerkwesen
 Group(pl):	Sieciowe
@@ -67,6 +70,7 @@ averaged over 1, 5 and 15 minutes.
 
 %package -n rstatd
 Summary:	kernel statistics server
+Summary(pl):	Serwer rstatd
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
@@ -87,10 +91,10 @@ command.
 ./configure
 
 %{__make} CC="%{__cc}" \
-	CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O0 -g} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
+	CFLAGS="%{rpmcflags} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
 
 %{__make} CC="%{__cc}" \
-	CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O0 -g}" -C rpc.rstatd
+	CFLAGS="%{rpmcflags}" -C rpc.rstatd
 
 %install
 rm -rf $RPM_BUILD_ROOT
