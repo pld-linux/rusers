@@ -1,7 +1,7 @@
 Summary:	Displays the users logged into machines on the local network.
 Name:		rusers
 Version:	0.17
-Release:	0
+Release:	1
 Copyright:	BSD
 Group:		Networking/Daemons
 Group(pl):	Sieciowe/Serwery
