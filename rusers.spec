@@ -32,16 +32,16 @@ local network.
 
 %build
 make
-make -C rpc.rstatd
+%{__make} -C rpc.rstatd
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_sbindir},%{_mandir}/man{1,8}}
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 
-make install \
+%{__make} install \
 	INSTALLROOT=$RPM_BUILD_ROOT
-make install install -C rpc.rstatd \
+%{__make} install install -C rpc.rstatd \
 	INSTALLROOT=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/rusersd
