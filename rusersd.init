@@ -12,13 +12,18 @@
 . /etc/sysconfig/network
 
 # Check that networking is up.
-if is_no "${NETWORKING}"; then
-	msg_network_down rusersd
-	exit 1
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down rusersd
+		exit 1
+	fi
+else
+	exit 0
 fi
 
 # Get rusersd config
 [ -f /etc/sysconfig/rusersd ] && . /etc/sysconfig/rusersd
+
 
 # See how we were called.
 case "$1" in
@@ -28,10 +33,7 @@ case "$1" in
 		msg_starting rusers
 		daemon rpc.rusersd
 		RETVAL=$?
-		if [ $RETVAL -eq 0 ]; then
-			touch /var/lock/subsys/rusersd
-			RETVAL=1
-		fi
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rusersd
 	else
 		msg_already_running rusersd
 		exit 1
@@ -55,7 +57,7 @@ case "$1" in
 	$0 start
 	;;
   *)
-	msg_usage "$0 {start|stop|status|restart|reload|force-reload}"
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
 	exit 1
 esac
 
