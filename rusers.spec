@@ -87,10 +87,10 @@ command.
 ./configure
 
 %{__make} CC="%{__cc}" \
-	CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O -g} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
+	CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O0 -g} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
 
 %{__make} CC="%{__cc}" \
-	CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O -g}" -C rpc.rstatd
+	CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debig:-O0 -g}" -C rpc.rstatd
 
 %install
 rm -rf $RPM_BUILD_ROOT
