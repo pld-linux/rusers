@@ -155,7 +155,7 @@ if [ -f /var/lock/subsys/rusersd ]; then
 else
 	echo "Type \"/etc/rc.d/init.d/rusersd start\" to start rusersd server" 1>&2
 fi
-	
+
 %preun -n rusersd
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/rusersd ]; then
@@ -171,7 +171,7 @@ if [ -f /var/lock/subsys/rstatd ]; then
 else
 	echo "Type \"/etc/rc.d/init.d/rstatd start\" to start rstatd server" 1>&2
 fi
-	
+
 %preun -n rstatd
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/rstatd ]; then
