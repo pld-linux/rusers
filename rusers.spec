@@ -31,7 +31,7 @@ local network.
 %patch2 -p1
 
 %build
-make
+%{__make}
 %{__make} -C rpc.rstatd
 
 %install
