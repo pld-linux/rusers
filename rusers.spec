@@ -7,7 +7,7 @@ Summary(pt_BR):	Mostra a informação de login para máquinas remotas
 Summary(tr):	Að üzerindeki makinalardaki kullanýcýlarý sorgular
 Name:		rusers
 Version:	0.17
-Release:	15
+Release:	16
 License:	BSD
 Group:		Networking
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -120,11 +120,14 @@ Statystyki te zwykle s± czytane komend± rup(1).
 %build
 ./configure
 
-%{__make} CC="%{__cc}" \
+%{__make} \
+	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
 
-%{__make} CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}" -C rpc.rstatd
+%{__make} -C rpc.rstatd \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}" \
+	LIBS="-lproc"
 
 %install
 rm -rf $RPM_BUILD_ROOT
