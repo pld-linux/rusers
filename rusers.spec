@@ -1,11 +1,13 @@
 Summary:	Displays the users logged into machines on the local network
 Summary(de):	Anzeige von Login-Infos für entfernte Computer
+Summary(es):	El cliente rusers
 Summary(fr):	Affiche des informations de login pour les machines distantes
 Summary(pl):	Wy¶wietla listê u¿ytkowników zalogowanych na komputerach w sieci lokalnej
+Summary(pt_BR):	Mostra a informação de login para máquinas remotas
 Summary(tr):	Að üzerindeki makinalardaki kullanýcýlarý sorgular
 Name:		rusers
 Version:	0.17
-Release:	8
+Release:	13
 License:	BSD
 Group:		Networking
 Group(de):	Netzwerkwesen
@@ -32,6 +34,7 @@ Mit Hilfe des rusers-Server und Client (beide Teil dieses Pakets) kann
 man herausfinden, welche Benutzer an welchen Rechnern im lokalen
 Netwerk angemeldet sind.
 
+%description -l es
 %description -l fr
 Le client et le serveur rusers, tous deux inclus dans ce package,
 permettent aux utilisateurs de trouver quels utilisateurs sont
@@ -43,6 +46,12 @@ ró¿nych maszynach w sieci lokalnej. Wynik komendy rusers jest podobne
 do komendy who, ale dla okre¶lonej listy komputerów lub wszystkich
 maszyn z sieci lokalnej.
 
+%description -l pt_BR
+O programa rusers permite descobrir quem está em várias máquinas na
+rede. O comando rusers fornece uma saída similar a do comando who para
+a lista de máquinas especificada ou para todas as máquinas da rede
+local.
+
 %description -l tr
 Bu pakette yer alan rusers sunucusu ve istemcisi ile bir kullanýcý að
 üzerinde bu hizmeti sunan diðer makinalardaki kullanýcýlarý
@@ -50,7 +59,9 @@ sorgulayabilir.
 
 %package -n rusersd
 Summary:	Server for the rusers protocol
+Summary(es):	El servidor rusers
 Summary(pl):	Serwer protoko³u rusers
+Summary(pt_BR):	Servidor para o protocolo rusers
 Group:		Networking/Daemons
 Group(de):	Netzwerkwesen/Server
 Group(pl):	Sieciowe/Serwery
@@ -62,8 +73,15 @@ Prereq:		rc-scripts
 The rusersd package contains the server for responding to rusers
 requests.
 
+%description -l pt_BR -n rusersd
+Servidor para o protocolo rusers.
+
 %description -n rusersd -l pl
 Pakiet rusersd zawiera serwer odpowiadaj±cy na zapytania rusers.
+
+%description -l es -n rusersd
+El servidor rusers incluido en este paquete, permiten ver cual de los
+usuarios están "logados" en otras máquinas de la red.
 
 %package -n rup
 Summary:	rstatd client
