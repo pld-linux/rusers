@@ -13,7 +13,7 @@
 
 # Check that networking is up.
 if is_no "${NETWORKING}"; then
-	msg_Network_Down rstatd
+	msg_network_down rstatd
 	exit 1
 fi
 
@@ -33,7 +33,7 @@ case "$1" in
 			RETVAL=1
 		fi
 	else
-		msg_Already_Running rstat
+		msg_already_running rstat
 		exit 1
 	fi
 	;;
@@ -43,7 +43,7 @@ case "$1" in
 		killproc rpc.rstatd
 		rm -f /var/lock/subsys/rstatd >/dev/null 2>&1
 	else
-		msg_Not_Running rstatd
+		msg_not_running rstatd
 		exit 1
 	fi	
 	;;
@@ -55,7 +55,7 @@ case "$1" in
 	$0 start
 	;;
   *)
-	msg_Usage "$0 {start|stop|status|restart|reload|force-reload}"
+	msg_usage "$0 {start|stop|status|restart|reload|force-reload}"
 	exit 1
 esac
 
