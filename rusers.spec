@@ -68,15 +68,15 @@ Obsoletes:	rusers-server
 The rusersd package contains the server for responding to rusers
 requests.
 
-%description -n rusersd -l pt_BR
-Servidor para o protocolo rusers.
+%description -n rusersd -l es
+El servidor rusers incluido en este paquete, permiten ver cual de los
+usuarios están "logados" en otras máquinas de la red.
 
 %description -n rusersd -l pl
 Pakiet rusersd zawiera serwer odpowiadaj±cy na zapytania rusers.
 
-%description -n rusersd -l es
-El servidor rusers incluido en este paquete, permiten ver cual de los
-usuarios están "logados" en otras máquinas de la red.
+%description -n rusersd -l pt_BR
+Servidor para o protocolo rusers.
 
 %package -n rup
 Summary:	rstatd client
