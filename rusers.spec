@@ -1,4 +1,7 @@
 Summary:	Displays the users logged into machines on the local network
+Summary(de):	Anzeige von Login-Infos für entfernte Computer
+Summary(fr):	Affiche des informations de login pour les machines distantes
+Summary(tr):	Að üzerindeki makinalardaki kullanýcýlarý sorgular
 Name:		rusers
 Version:	0.17
 Release:	7
@@ -20,6 +23,21 @@ The rusers program allows users to find out who is logged into various
 machines on the local network. The rusers command produces output
 similar to who, but for the specified list of hosts or for all
 machines on the local network.
+
+%description -l de
+Mit Hilfe des rusers-Server und Client (beide Teil dieses Pakets) kann
+man herausfinden, welche Benutzer an welchen Rechnern im lokalen
+Netwerk angemeldet sind.
+
+%description -l fr
+Le client et le serveur rusers, tous deux inclus dans ce package,
+permettent aux utilisateurs de trouver quels utilisateurs sont
+connectés sur les différentes machines du réseau local.
+
+%description -l tr
+Bu pakette yer alan rusers sunucusu ve istemcisi ile bir kullanýcý að
+üzerinde bu hizmeti sunan diðer makinalardaki kullanýcýlarý
+sorgulayabilir.
 
 %package -n rusersd
 Summary:	Server for the rusers protocol
