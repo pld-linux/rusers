@@ -27,8 +27,8 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/rstatd ]; then
 		msg_starting rstatd
 		daemon rpc.rstatd
-		RETVAL2=$?
-		if [ $RETVAL -eq 0 -a $RETVAL2 -eq 0 ]; then
+		RETVAL=$?
+		if [ $RETVAL -eq 0 ]; then
 			touch /var/lock/subsys/rstatd
 			RETVAL=1
 		fi
@@ -50,7 +50,7 @@ case "$1" in
   status)
 	status rpc.rstatd
 	;;
-  reload,restart,force-reload)
+  reload|restart|force-reload)
 	$0 stop
 	$0 start
 	;;

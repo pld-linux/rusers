@@ -27,8 +27,8 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/rusersd ]; then
 		msg_starting rusers
 		daemon rpc.rusersd
-		RETVAL2=$?
-		if [ $RETVAL -eq 0 -a $RETVAL2 -eq 0 ]; then
+		RETVAL=$?
+		if [ $RETVAL -eq 0 ]; then
 			touch /var/lock/subsys/rusersd
 			RETVAL=1
 		fi
@@ -50,7 +50,7 @@ case "$1" in
   status)
 	status rpc.rusersd
 	;;
-  reload,restart,force-reload)
+  reload|restart|force-reload)
 	$0 stop
 	$0 start
 	;;
