@@ -13,7 +13,7 @@ Patch1:		rusers-0.10-maint.patch
 Patch2:		netkit-rusers-install.patch
 Prereq:		/sbin/chkconfig
 Requires:	rc-scripts
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The rusers program allows users to find out who is logged into
