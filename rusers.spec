@@ -3,7 +3,8 @@ Name:		rusers
 Version:	0.16
 Release:	5
 Copyright:	BSD
-Group:		System Environment/Daemons
+Group:		Networking/Daemons
+Group(pl):	Sieciowe/Serwery
 Source0:	ftp://sunsite.unc.edu/pub/Linux/system/network/daemons/netkit-%{name}-%{version}.tar.gz
 Source1:	rusersd.init
 Source2:	rstatd.init
@@ -65,11 +66,27 @@ rm -rf $RPM_BUILD_ROOT
 %post
 /sbin/chkconfig --add rusersd
 /sbin/chkconfig --add rstatd
-
+if [ -f /var/lock/subsys/rusersd ]; then
+	/etc/rc.d/init.d/rusersd restart 1>&2
+else
+	echo "Type \"/etc/rc.d/init.d/rusersd start\" to start rusersd server" 1>&2
+fi
+if [ -f /var/lock/subsys/rstatd ]; then
+	/etc/rc.d/init.d/rstatd restart 1>&2
+else
+	echo "Type \"/etc/rc.d/init.d/rstatd start\" to start rstatd server" 1>&2
+fi
+	
 %postun
-if [ $1 = 0 ]; then
-    /sbin/chkconfig --del rusersd
-    /sbin/chkconfig --del rstatd
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/rusersd ]; then
+		/etc/rc.d/init.d/rusersd stop 1>&2
+	fi
+	if [ -f /var/lock/subsys/rstatd ]; then
+		/etc/rc.d/init.d/rstatd stop 1>&2
+	fi
+	/sbin/chkconfig --del rusersd
+	/sbin/chkconfig --del rstatd
 fi
 
 %files
