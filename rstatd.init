@@ -12,33 +12,51 @@
 . /etc/sysconfig/network
 
 # Check that networking is up.
-if [ ${NETWORKING} = "no" ]
-then
-	exit 0
+if is_no "${NETWORKING}"; then
+	msg_Network_Down rstatd
+	exit 1
 fi
+
+# Get rstatd config
+[ -f /etc/sysconfig/rstatd ] && . /etc/sysconfig/rstatd
 
 # See how we were called.
 case "$1" in
   start)
-	show "Starting rstat services"
-	daemon rpc.rstatd
-	touch /var/lock/subsys/rstatd
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/rstatd ]; then
+		msg_starting rstatd
+		daemon rpc.rstatd
+		RETVAL2=$?
+		if [ $RETVAL -eq 0 -a $RETVAL2 -eq 0 ]; then
+			touch /var/lock/subsys/rstatd
+			RETVAL=1
+		fi
+	else
+		msg_Already_Running rstat
+		exit 1
+	fi
 	;;
   stop)
-	show "Stopping rstat services"
-	killproc rpc.rstatd
-	rm -f /var/lock/subsys/rstatd
+	if [ -f /var/lock/subsys/rstatd ]; then
+		msg_stopping rpc.rstatd
+		killproc rpc.rstatd
+		rm -f /var/lock/subsys/rstatd >/dev/null 2>&1
+	else
+		msg_Not_Running rstatd
+		exit 1
+	fi	
 	;;
   status)
 	status rpc.rstatd
 	;;
-  restart|reload)
+  reload,restart,force-reload)
 	$0 stop
 	$0 start
 	;;
   *)
-	echo "Usage: rstatd {start|stop|status|restart}"
+	msg_Usage "$0 {start|stop|status|restart|reload|force-reload}"
 	exit 1
 esac
 
-exit 0
+exit $RETVAL

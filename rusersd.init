@@ -17,28 +17,46 @@ if is_no "${NETWORKING}"; then
 	exit 1
 fi
 
+# Get rusersd config
+[ -f /etc/sysconfig/rusersd ] && . /etc/sysconfig/rusersd
+
 # See how we were called.
 case "$1" in
   start)
-	msg_starting rusers
-	daemon rpc.rusersd
-	touch /var/lock/subsys/rusersd
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/rusersd ]; then
+		msg_starting rusers
+		daemon rpc.rusersd
+		RETVAL2=$?
+		if [ $RETVAL -eq 0 -a $RETVAL2 -eq 0 ]; then
+			touch /var/lock/subsys/rusersd
+			RETVAL=1
+		fi
+	else
+		msg_Already_Running rusersd
+		exit 1
+	fi
 	;;
   stop)
-	msg_stopping rusers
-	killproc rpc.rusersd
-	rm -f /var/lock/subsys/rusersd
+	if [ -f /var/lock/subsys/rusersd ]; then
+		msg_stopping rpc.rusersd
+		killproc rpc.rusersd
+		rm -f /var/lock/subsys/rusersd >/dev/null 2>&1
+	else
+		msg_Not_Running rusersd
+		exit 1
+	fi	
 	;;
   status)
 	status rpc.rusersd
 	;;
-  restart|reload)
+  reload,restart,force-reload)
 	$0 stop
 	$0 start
 	;;
   *)
-	msg_Usage "$0 {start|stop|status|restart}"
+	msg_Usage "$0 {start|stop|status|restart|reload|force-reload}"
 	exit 1
 esac
 
-exit 0
+exit $RETVAL
