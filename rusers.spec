@@ -121,16 +121,36 @@ echo ".so rpc.rusersd.8" > $RPM_BUILD_ROOT%{_mandir}/man8/rusersd.8
 rm -rf $RPM_BUILD_ROOT
 
 %post -n rusersd
-NAME=rusersd; DESC="rusersd server"; %chkconfig_add
+/sbin/chkconfig --add rusersd
+if [ -f /var/lock/subsys/rusersd ]; then
+	/etc/rc.d/init.d/rusersd restart 1>&2
+else
+	echo "Type \"/etc/rc.d/init.d/rusersd start\" to start rusersd server" 1>&2
+fi
 	
-%preun -n rusersd
-NAME=rusers; %chkconfig_del
+%postun -n rusersd
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/rusersd ]; then
+		/etc/rc.d/init.d/rusersd stop 1>&2
+	fi
+	/sbin/chkconfig --del rusersd
+fi
 
 %post -n rstatd
-NAME=rstatd; DESC="rstatd server"; %chkconfig_add
+/sbin/chkconfig --add rstatd
+if [ -f /var/lock/subsys/rstatd ]; then
+	/etc/rc.d/init.d/rstatd restart 1>&2
+else
+	echo "Type \"/etc/rc.d/init.d/rstatd start\" to start rstatd server" 1>&2
+fi
 	
-%preun -n rstatd
-NAME=rstatd; %chkconfig_del
+%postun
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/rstatd ]; then
+		/etc/rc.d/init.d/rstatd stop 1>&2
+	fi
+	/sbin/chkconfig --del rstatd
+fi
 
 %files
 %defattr(644,root,root,755)
