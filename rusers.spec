@@ -10,10 +10,6 @@ Version:	0.17
 Release:	14
 License:	BSD
 Group:		Networking
-Group(de):	Netzwerkwesen
-Group(es):	Red
-Group(pl):	Sieciowe
-Group(pt_BR):	Rede
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
 Source1:	%{name}d.init
 Source2:	rstatd.init
@@ -62,8 +58,6 @@ Summary(es):	El servidor rusers
 Summary(pl):	Serwer protoko³u rusers
 Summary(pt_BR):	Servidor para o protocolo rusers
 Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
 Obsoletes:	rusers-server
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts
@@ -86,10 +80,6 @@ usuarios están "logados" en otras máquinas de la red.
 Summary:	rstatd client
 Summary(pl):	Klient rstatd
 Group:		Networking
-Group(de):	Netzwerkwesen
-Group(es):	Red
-Group(pl):	Sieciowe
-Group(pt_BR):	Rede
 
 %description -n rup
 rup displays a summary of the current system status of a particular
@@ -108,8 +98,6 @@ jest jako ilo¶æ procesów w kolejce ¶rednio w 1, 5 i 15 minut.
 Summary:	kernel statistics server
 Summary(pl):	Serwer rstatd
 Group:		Networking/Daemons
-Group(de):	Netzwerkwesen/Server
-Group(pl):	Sieciowe/Serwery
 Prereq:		/sbin/chkconfig
 Prereq:		rc-scripts
 
