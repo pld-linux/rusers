@@ -24,7 +24,7 @@ fi
 # Get rstatd config
 [ -f /etc/sysconfig/rstatd ] && . /etc/sysconfig/rstatd
 
-
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -36,7 +36,6 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rstatd
 	else
 		msg_already_running rstat
-		exit 1
 	fi
 	;;
   stop)
@@ -46,19 +45,20 @@ case "$1" in
 		rm -f /var/lock/subsys/rstatd >/dev/null 2>&1
 	else
 		msg_not_running rstatd
-		exit 1
 	fi	
 	;;
   status)
 	status rpc.rstatd
+	exit $?
 	;;
-  reload|restart|force-reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
