@@ -7,7 +7,7 @@ Summary(pt_BR):	Mostra a informação de login para máquinas remotas
 Summary(tr):	Að üzerindeki makinalardaki kullanýcýlarý sorgular
 Name:		rusers
 Version:	0.17
-Release:	17
+Release:	18
 License:	BSD
 Group:		Networking
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
