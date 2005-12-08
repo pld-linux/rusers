@@ -45,7 +45,7 @@ case "$1" in
 		rm -f /var/lock/subsys/rstatd >/dev/null 2>&1
 	else
 		msg_not_running rstatd
-	fi	
+	fi
 	;;
   status)
 	status rpc.rstatd
