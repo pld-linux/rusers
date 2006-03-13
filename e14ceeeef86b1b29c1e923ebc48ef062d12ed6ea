@@ -1,0 +1,2 @@
+- adapterized, make %{debug} ready and added uing new rpm automation suit
+  but still need work on separate clients and servers.
