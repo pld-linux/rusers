@@ -19,6 +19,7 @@ Source3:	rstatd.tar.gz
 Patch0:		netkit-%{name}-numusers.patch
 Patch1:		rstatd-jbj.patch
 BuildRequires:	procps-devel >= 1:3.2.5-3
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -60,8 +61,8 @@ Summary(es):	El servidor rusers
 Summary(pl):	Serwer protoko³u rusers
 Summary(pt_BR):	Servidor para o protocolo rusers
 Group:		Networking/Daemons
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 Obsoletes:	rusers-server
 
 %description -n rusersd
@@ -100,8 +101,8 @@ jest jako ilo¶æ procesów w kolejce ¶rednio w 1, 5 i 15 minut.
 Summary:	kernel statistics server
 Summary(pl):	Serwer rstatd
 Group:		Networking/Daemons
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 
 %description -n rstatd
 rpc.rstatd is a server which returns performance statistics obtained
@@ -113,7 +114,7 @@ rpc.rstatd to serwer podaj±cy statystyki wydajno¶ci pobrane od j±dra.
 Statystyki te zwykle s± czytane komend± rup(1).
 
 %prep
-%setup -q -n netkit-rusers-%{version} -a3
+%setup -q -n netkit-%{name}-%{version} -a3
 %patch0 -p1
 %patch1 -p1
 
@@ -155,33 +156,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %post -n rusersd
 /sbin/chkconfig --add rusersd
-if [ -f /var/lock/subsys/rusersd ]; then
-	/etc/rc.d/init.d/rusersd restart 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rusersd start\" to start rusersd server" 1>&2
-fi
+%service rusersd restart "rusersd server"
 
 %preun -n rusersd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/rusersd ]; then
-		/etc/rc.d/init.d/rusersd stop 1>&2
-	fi
+	%service rusersd stop
 	/sbin/chkconfig --del rusersd
 fi
 
 %post -n rstatd
 /sbin/chkconfig --add rstatd
-if [ -f /var/lock/subsys/rstatd ]; then
-	/etc/rc.d/init.d/rstatd restart 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rstatd start\" to start rstatd server" 1>&2
-fi
+%service rstatd restart "rstatd server"
 
 %preun -n rstatd
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/rstatd ]; then
-		/etc/rc.d/init.d/rstatd stop 1>&2
-	fi
+	%service rstatd stop
 	/sbin/chkconfig --del rstatd
 fi
 
