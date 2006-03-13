@@ -1,0 +1,5 @@
+- release 7,
+- rusers, rpc.rusersd, rup and rpc.rstatd now in four separated
+  subpackages,
+- use CC="%{__cc}" in make parameters because silly configure script uses
+  egcs if found.
