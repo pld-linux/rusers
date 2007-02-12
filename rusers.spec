@@ -1,10 +1,10 @@
 Summary:	Displays the users logged into machines on the local network
-Summary(de.UTF-8):   Anzeige von Login-Infos für entfernte Computer
-Summary(es.UTF-8):   El cliente rusers
-Summary(fr.UTF-8):   Affiche des informations de login pour les machines distantes
-Summary(pl.UTF-8):   Wyświetla listę użytkowników zalogowanych na komputerach w sieci lokalnej
-Summary(pt_BR.UTF-8):   Mostra a informação de login para máquinas remotas
-Summary(tr.UTF-8):   Ağ üzerindeki makinalardaki kullanıcıları sorgular
+Summary(de.UTF-8):	Anzeige von Login-Infos für entfernte Computer
+Summary(es.UTF-8):	El cliente rusers
+Summary(fr.UTF-8):	Affiche des informations de login pour les machines distantes
+Summary(pl.UTF-8):	Wyświetla listę użytkowników zalogowanych na komputerach w sieci lokalnej
+Summary(pt_BR.UTF-8):	Mostra a informação de login para máquinas remotas
+Summary(tr.UTF-8):	Ağ üzerindeki makinalardaki kullanıcıları sorgular
 Name:		rusers
 Version:	0.17
 Release:	21
@@ -57,9 +57,9 @@ sorgulayabilir.
 
 %package -n rusersd
 Summary:	Server for the rusers protocol
-Summary(es.UTF-8):   El servidor rusers
-Summary(pl.UTF-8):   Serwer protokołu rusers
-Summary(pt_BR.UTF-8):   Servidor para o protocolo rusers
+Summary(es.UTF-8):	El servidor rusers
+Summary(pl.UTF-8):	Serwer protokołu rusers
+Summary(pt_BR.UTF-8):	Servidor para o protocolo rusers
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
@@ -81,7 +81,7 @@ Servidor para o protocolo rusers.
 
 %package -n rup
 Summary:	rstatd client
-Summary(pl.UTF-8):   Klient rstatd
+Summary(pl.UTF-8):	Klient rstatd
 Group:		Networking
 
 %description -n rup
@@ -99,7 +99,7 @@ jest jako ilość procesów w kolejce średnio w 1, 5 i 15 minut.
 
 %package -n rstatd
 Summary:	kernel statistics server
-Summary(pl.UTF-8):   Serwer rstatd
+Summary(pl.UTF-8):	Serwer rstatd
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
