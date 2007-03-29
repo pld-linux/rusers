@@ -24,10 +24,7 @@ fi
 # Get rusersd config
 [ -f /etc/sysconfig/rusersd ] && . /etc/sysconfig/rusersd
 
-RETVAL=0
-# See how we were called.
-case "$1" in
-  start)
+start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/rusersd ]; then
 		msg_starting rusers
@@ -37,8 +34,9 @@ case "$1" in
 	else
 		msg_already_running rusersd
 	fi
-	;;
-  stop)
+}
+
+stop() {
 	if [ -f /var/lock/subsys/rusersd ]; then
 		msg_stopping rpc.rusersd
 		killproc rpc.rusersd
@@ -46,15 +44,24 @@ case "$1" in
 	else
 		msg_not_running rusersd
 	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
 	;;
   status)
 	status rpc.rusersd
 	exit $?
 	;;
   restart|force-reload)
-	$0 stop
-	$0 start
-	exit $?
+	stop
+	start
 	;;
   *)
 	msg_usage "$0 {start|stop|restart|force-reload|status}"
