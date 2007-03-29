@@ -1,10 +1,10 @@
 Summary:	Displays the users logged into machines on the local network
-Summary(de.UTF-8):	Anzeige von Login-Infos fÃ¼r entfernte Computer
-Summary(es.UTF-8):	El cliente rusers
-Summary(fr.UTF-8):	Affiche des informations de login pour les machines distantes
-Summary(pl.UTF-8):	WyÅ›wietla listÄ™ uÅ¼ytkownikÃ³w zalogowanych na komputerach w sieci lokalnej
-Summary(pt_BR.UTF-8):	Mostra a informaÃ§Ã£o de login para mÃ¡quinas remotas
-Summary(tr.UTF-8):	AÄŸ Ã¼zerindeki makinalardaki kullanÄ±cÄ±larÄ± sorgular
+Summary(de):	Anzeige von Login-Infos für entfernte Computer
+Summary(es):	El cliente rusers
+Summary(fr):	Affiche des informations de login pour les machines distantes
+Summary(pl):	Wy¶wietla listê u¿ytkowników zalogowanych na komputerach w sieci lokalnej
+Summary(pt_BR):	Mostra a informação de login para máquinas remotas
+Summary(tr):	Ağ üzerindeki makinalardaki kullanıcıları sorgular
 Name:		rusers
 Version:	0.17
 Release:	21
@@ -28,38 +28,38 @@ machines on the local network. The rusers command produces output
 similar to who, but for the specified list of hosts or for all
 machines on the local network.
 
-%description -l de.UTF-8
+%description -l de
 Mit Hilfe des rusers-Server und Client (beide Teil dieses Pakets) kann
 man herausfinden, welche Benutzer an welchen Rechnern im lokalen
 Netwerk angemeldet sind.
 
-%description -l fr.UTF-8
+%description -l fr
 Le client et le serveur rusers, tous deux inclus dans ce package,
 permettent aux utilisateurs de trouver quels utilisateurs sont
-connectÃ©s sur les diffÃ©rentes machines du rÃ©seau local.
+connectés sur les différentes machines du réseau local.
 
-%description -l pl.UTF-8
-Program rusers pozwala uÅ¼ytkownikom sprawdziÄ‡ kto jest zalogowany na
-rÃ³Å¼nych maszynach w sieci lokalnej. Wynik komendy rusers jest podobne
-do komendy who, ale dla okreÅ›lonej listy komputerÃ³w lub wszystkich
+%description -l pl
+Program rusers pozwala u¿ytkownikom sprawdziæ kto jest zalogowany na
+ró¿nych maszynach w sieci lokalnej. Wynik komendy rusers jest podobne
+do komendy who, ale dla okre¶lonej listy komputerów lub wszystkich
 maszyn z sieci lokalnej.
 
-%description -l pt_BR.UTF-8
-O programa rusers permite descobrir quem estÃ¡ em vÃ¡rias mÃ¡quinas na
-rede. O comando rusers fornece uma saÃ­da similar a do comando who para
-a lista de mÃ¡quinas especificada ou para todas as mÃ¡quinas da rede
+%description -l pt_BR
+O programa rusers permite descobrir quem está em várias máquinas na
+rede. O comando rusers fornece uma saída similar a do comando who para
+a lista de máquinas especificada ou para todas as máquinas da rede
 local.
 
-%description -l tr.UTF-8
-Bu pakette yer alan rusers sunucusu ve istemcisi ile bir kullanÄ±cÄ± aÄŸ
-Ã¼zerinde bu hizmeti sunan diÄŸer makinalardaki kullanÄ±cÄ±larÄ±
+%description -l tr
+Bu pakette yer alan rusers sunucusu ve istemcisi ile bir kullanıcı ağ
+üzerinde bu hizmeti sunan diğer makinalardaki kullanıcıları
 sorgulayabilir.
 
 %package -n rusersd
 Summary:	Server for the rusers protocol
-Summary(es.UTF-8):	El servidor rusers
-Summary(pl.UTF-8):	Serwer protokoÅ‚u rusers
-Summary(pt_BR.UTF-8):	Servidor para o protocolo rusers
+Summary(es):	El servidor rusers
+Summary(pl):	Serwer protoko³u rusers
+Summary(pt_BR):	Servidor para o protocolo rusers
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
@@ -69,19 +69,19 @@ Obsoletes:	rusers-server
 The rusersd package contains the server for responding to rusers
 requests.
 
-%description -n rusersd -l es.UTF-8
+%description -n rusersd -l es
 El servidor rusers incluido en este paquete, permiten ver cual de los
-usuarios estÃ¡n "logados" en otras mÃ¡quinas de la red.
+usuarios están "logados" en otras máquinas de la red.
 
-%description -n rusersd -l pl.UTF-8
-Pakiet rusersd zawiera serwer odpowiadajÄ…cy na zapytania rusers.
+%description -n rusersd -l pl
+Pakiet rusersd zawiera serwer odpowiadaj±cy na zapytania rusers.
 
-%description -n rusersd -l pt_BR.UTF-8
+%description -n rusersd -l pt_BR
 Servidor para o protocolo rusers.
 
 %package -n rup
 Summary:	rstatd client
-Summary(pl.UTF-8):	Klient rstatd
+Summary(pl):	Klient rstatd
 Group:		Networking
 
 %description -n rup
@@ -91,15 +91,15 @@ time of day, how long the system has been up, and the load averages.
 The load average numbers give the number of jobs in the run queue
 averaged over 1, 5 and 15 minutes.
 
-%description -n rup -l pl.UTF-8
-rup wyÅ›wietla podsumowanie aktualnego stanu systemu dla okreÅ›lonego
-komputera lub wszystkich z sieci lokalnej. WyjÅ›cie zawiera aktualny
-czas, jak dÅ‚ugo system jest wÅ‚Ä…czony i obciÄ…Å¼enie. ObciÄ…Å¼enie podawane
-jest jako iloÅ›Ä‡ procesÃ³w w kolejce Å›rednio w 1, 5 i 15 minut.
+%description -n rup -l pl
+rup wy¶wietla podsumowanie aktualnego stanu systemu dla okre¶lonego
+komputera lub wszystkich z sieci lokalnej. Wyj¶cie zawiera aktualny
+czas, jak d³ugo system jest w³±czony i obci±¿enie. Obci±¿enie podawane
+jest jako ilo¶æ procesów w kolejce ¶rednio w 1, 5 i 15 minut.
 
 %package -n rstatd
 Summary:	kernel statistics server
-Summary(pl.UTF-8):	Serwer rstatd
+Summary(pl):	Serwer rstatd
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
@@ -109,9 +109,9 @@ rpc.rstatd is a server which returns performance statistics obtained
 from the kernel. These statistics are usually read using the rup(1)
 command.
 
-%description -n rstatd -l pl.UTF-8
-rpc.rstatd to serwer podajÄ…cy statystyki wydajnoÅ›ci pobrane od jÄ…dra.
-Statystyki te zwykle sÄ… czytane komendÄ… rup(1).
+%description -n rstatd -l pl
+rpc.rstatd to serwer podaj±cy statystyki wydajno¶ci pobrane od j±dra.
+Statystyki te zwykle s± czytane komend± rup(1).
 
 %prep
 %setup -q -n netkit-%{name}-%{version} -a3
