@@ -24,10 +24,7 @@ fi
 # Get rstatd config
 [ -f /etc/sysconfig/rstatd ] && . /etc/sysconfig/rstatd
 
-RETVAL=0
-# See how we were called.
-case "$1" in
-  start)
+start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/rstatd ]; then
 		msg_starting rstatd
@@ -37,8 +34,9 @@ case "$1" in
 	else
 		msg_already_running rstat
 	fi
-	;;
-  stop)
+}
+
+stop() {
 	if [ -f /var/lock/subsys/rstatd ]; then
 		msg_stopping rpc.rstatd
 		killproc rpc.rstatd
@@ -46,15 +44,24 @@ case "$1" in
 	else
 		msg_not_running rstatd
 	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
 	;;
   status)
 	status rpc.rstatd
 	exit $?
 	;;
   restart|force-reload)
-	$0 stop
-	$0 start
-	exit $?
+	stop
+	start
 	;;
   *)
 	msg_usage "$0 {start|stop|restart|force-reload|status}"
