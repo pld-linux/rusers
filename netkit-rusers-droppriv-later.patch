@@ -1,0 +1,49 @@
+--- netkit-rusers-0.17/rpc.rusersd/rusersd.c~	2000-07-23 06:09:28.000000000 +0200
++++ netkit-rusers-0.17/rpc.rusersd/rusersd.c	2007-09-25 19:26:29.000000000 +0200
+@@ -75,23 +75,6 @@
+ 	/* Open syslog */
+ 	openlog("rpc.rusersd", LOG_PID, LOG_DAEMON);
+  
+-	/* Drop privilege */
+-	if (getuid() == 0) {
+-		struct passwd	*pw;
+- 
+-		if ((pw = getpwnam("nobody")) == NULL) {
+-			syslog(LOG_WARNING, "Unable to find user nobody: %m");
+-			exit(1);
+-		}
+-		if (setgroups(1, &pw->pw_gid) < 0
+-		 || setgid(pw->pw_gid) < 0
+-		 || setuid(pw->pw_uid) < 0) {
+-			syslog(LOG_WARNING, "Failed to drop privilege: %m");
+-			exit(1);
+-		}
+-	}
+- 
+-	
+ 	/*
+ 	 * See if inetd started us
+ 	 */
+@@ -129,6 +112,22 @@
+ 		exit(1);
+ 	}
+ 
++	/* Drop privilege */
++	if (getuid() == 0) {
++		struct passwd	*pw;
++ 
++		if ((pw = getpwnam("nobody")) == NULL) {
++			syslog(LOG_WARNING, "Unable to find user nobody: %m");
++			exit(1);
++		}
++		if (setgroups(1, &pw->pw_gid) < 0
++		 || setgid(pw->pw_gid) < 0
++		 || setuid(pw->pw_uid) < 0) {
++			syslog(LOG_WARNING, "Failed to drop privilege: %m");
++			exit(1);
++		}
++	}
++ 
+ 	svc_run();
+ 	syslog(LOG_ERR, "svc_run returned");
+ 	exit(1);
