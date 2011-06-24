@@ -7,7 +7,7 @@ Summary(pt_BR.UTF-8):	Mostra a informação de login para máquinas remotas
 Summary(tr.UTF-8):	Ağ üzerindeki makinalardaki kullanıcıları sorgular
 Name:		rusers
 Version:	0.17
-Release:	24
+Release:	25
 License:	BSD
 Group:		Networking
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -19,6 +19,7 @@ Source3:	rstatd.tar.gz
 Patch0:		netkit-%{name}-numusers.patch
 Patch1:		rstatd-jbj.patch
 Patch2:		netkit-%{name}-droppriv-later.patch
+Patch3:		netkit-%{name}-includes.patch
 BuildRequires:	procps-devel >= 1:3.2.5-3
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -119,6 +120,7 @@ Statystyki te zwykle są czytane komendą rup(1).
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 ./configure
