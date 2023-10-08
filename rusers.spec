@@ -7,7 +7,7 @@ Summary(pt_BR.UTF-8):	Mostra a informação de login para máquinas remotas
 Summary(tr.UTF-8):	Ağ üzerindeki makinalardaki kullanıcıları sorgular
 Name:		rusers
 Version:	0.17
-Release:	31
+Release:	32
 License:	BSD
 Group:		Networking
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -20,6 +20,9 @@ Patch0:		netkit-%{name}-numusers.patch
 Patch1:		rstatd-jbj.patch
 Patch2:		netkit-%{name}-droppriv-later.patch
 Patch3:		netkit-%{name}-includes.patch
+Patch4:		procps.patch
+Patch5:		nostrip.patch
+BuildRequires:	libtirpc-devel
 BuildRequires:	procps-devel >= 1:3.2.5-3
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -121,18 +124,20 @@ Statystyki te zwykle są czytane komendą rup(1).
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 %build
-./configure
+CFLAGS="%{rpmcflags} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME -I/usr/include/tirpc" \
+LDFLAGS="%{rpmldflags}" \
+./configure \
+	--with-c-compiler=%{__cc}
 
 %{__make} \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME"
+	LIBS="-ltirpc"
 
 %{__make} -C rpc.rstatd \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}" \
-	LIBS="-lprocps"
+	LIBS="-lproc2 -ltirpc"
 
 %install
 rm -rf $RPM_BUILD_ROOT

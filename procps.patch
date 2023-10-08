@@ -1,0 +1,38 @@
+--- netkit-rusers-0.17/rpc.rstatd/rstat_proc.c.orig	2023-10-08 13:19:33.000000000 +0200
++++ netkit-rusers-0.17/rpc.rstatd/rstat_proc.c	2023-10-08 13:27:11.069502253 +0200
+@@ -59,6 +59,8 @@
+ #include <assert.h>
+ #include <ctype.h>
+ 
++#include <libproc2/misc.h>
++
+ #define	CP_USER		0
+ #define	CP_NICE		1
+ #define	CP_SYS		2
+@@ -552,9 +554,6 @@
+ #define	_DELTA(_x, _i)	( (_x)[(_i)] )
+ #endif
+ 
+-extern int uptime(double *, double *);
+-extern void loadavg(double *, double *, double *);
+-
+ static void
+ convert_stats(void)
+ {
+@@ -565,14 +564,14 @@
+ 	hz = sysconf(_SC_CLK_TCK);
+ 	gettimeofday(&tm, (struct timezone *) 0);
+ 
+-	i = uptime(&up, NULL);
++	i = procps_uptime(&up, NULL);
+ 	btm.tv_sec = tm.tv_sec - i;
+ 	btm.tv_usec = 0;
+ 	up -= i;
+ 	if (up > 0)
+ 		btm.tv_usec = 1000000 * up;
+ 
+-	loadavg(&avrun[0], &avrun[1], &avrun[2]);
++	procps_loadavg(&avrun[0], &avrun[1], &avrun[2]);
+ 	getstat(cpu_use+tog,cpu_nic+tog,cpu_sys+tog,cpu_idl+tog,
+ 		pgpgin+tog,pgpgout+tog,pswpin+tog,pswpout+tog,
+ 		inter+tog,ticks+tog,ctxt+tog, disk+tog);

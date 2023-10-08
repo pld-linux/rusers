@@ -1,7 +1,7 @@
 --- netkit-rusers-0.17/rup/err.c.includes	Sun Apr  6 00:13:31 1997
 +++ netkit-rusers-0.17/rup/err.c	Wed Jul 25 15:08:27 2001
 @@ -6,6 +6,7 @@
-   "$Id$";
+   "$Id: err.c,v 1.1 1997/04/05 22:13:31 dholland Exp $";
  
  #include <stdio.h>
 +#include <stdlib.h>

@@ -1,0 +1,44 @@
+--- netkit-rusers-0.17/rpc.rstatd/GNUmakefile~	1999-03-14 20:21:52.000000000 +0100
++++ netkit-rusers-0.17/rpc.rstatd/GNUmakefile	2023-10-08 13:32:51.525481394 +0200
+@@ -20,7 +20,7 @@
+ 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
+ 
+ install: rstatd
+-	install -s -m$(DAEMONMODE) rstatd $(INSTALLROOT)$(SBINDIR)/rpc.rstatd
++	install -m$(DAEMONMODE) rstatd $(INSTALLROOT)$(SBINDIR)/rpc.rstatd
+ 	install -m$(MANMODE) rpc.rstatd.8 $(INSTALLROOT)$(MANDIR)/man8
+ 	ln -sf rpc.rstatd.8 $(INSTALLROOT)$(MANDIR)/man8/rstatd.8
+ 
+--- netkit-rusers-0.17/rpc.rusersd/Makefile~	1999-12-12 19:05:03.000000000 +0100
++++ netkit-rusers-0.17/rpc.rusersd/Makefile	2023-10-08 13:33:25.689895097 +0200
+@@ -22,7 +22,7 @@
+ 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
+ 
+ install: rusersd
+-	install -s -m$(DAEMONMODE) rusersd $(INSTALLROOT)$(SBINDIR)/rpc.rusersd
++	install -m$(DAEMONMODE) rusersd $(INSTALLROOT)$(SBINDIR)/rpc.rusersd
+ 	install -m$(MANMODE) rpc.rusersd.8 $(INSTALLROOT)$(MANDIR)/man8
+ 	ln -sf rpc.rusersd.8 $(INSTALLROOT)$(MANDIR)/man8/rusersd.8
+ 
+--- netkit-rusers-0.17/rup/Makefile~	1999-12-12 19:05:04.000000000 +0100
++++ netkit-rusers-0.17/rup/Makefile	2023-10-08 13:33:43.393794200 +0200
+@@ -22,7 +22,7 @@
+ rup.o: ../version.h
+ 
+ install: rup
+-	install -s -m$(BINMODE) rup $(INSTALLROOT)$(BINDIR)
++	install -m$(BINMODE) rup $(INSTALLROOT)$(BINDIR)
+ 	install -m$(MANMODE) rup.1 $(INSTALLROOT)$(MANDIR)/man1
+ 
+ clean:
+--- netkit-rusers-0.17/rusers/Makefile~	1999-12-12 19:05:04.000000000 +0100
++++ netkit-rusers-0.17/rusers/Makefile	2023-10-08 13:33:59.874324201 +0200
+@@ -20,7 +20,7 @@
+ 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
+ 
+ install: rusers
+-	install -s -m$(BINMODE) rusers $(INSTALLROOT)$(BINDIR)
++	install -m$(BINMODE) rusers $(INSTALLROOT)$(BINDIR)
+ 	install -m$(MANMODE) rusers.1 $(INSTALLROOT)$(MANDIR)/man1
+ 
+ clean:
