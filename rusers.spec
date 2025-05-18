@@ -24,6 +24,7 @@ Patch4:		procps.patch
 Patch5:		nostrip.patch
 BuildRequires:	libtirpc-devel
 BuildRequires:	procps-devel >= 1:3.2.5-3
+BuildRequires:	rpcsvc-proto
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
