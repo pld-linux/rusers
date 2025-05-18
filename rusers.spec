@@ -22,6 +22,7 @@ Patch2:		netkit-%{name}-droppriv-later.patch
 Patch3:		netkit-%{name}-includes.patch
 Patch4:		procps.patch
 Patch5:		nostrip.patch
+Patch6:		types.patch
 BuildRequires:	libtirpc-devel
 BuildRequires:	procps-devel >= 1:3.2.5-3
 BuildRequires:	rpcsvc-proto
@@ -127,6 +128,7 @@ Statystyki te zwykle są czytane komendą rup(1).
 %patch -P3 -p1
 %patch -P4 -p1
 %patch -P5 -p1
+%patch -P6 -p1
 
 %build
 CFLAGS="%{rpmcflags} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME -I/usr/include/tirpc" \
