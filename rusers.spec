@@ -7,7 +7,7 @@ Summary(pt_BR.UTF-8):	Mostra a informação de login para máquinas remotas
 Summary(tr.UTF-8):	Ağ üzerindeki makinalardaki kullanıcıları sorgular
 Name:		rusers
 Version:	0.17
-Release:	33
+Release:	34
 License:	BSD
 Group:		Networking
 Source0:	ftp://ftp.linux.org.uk/pub/linux/Networking/netkit/netkit-%{name}-%{version}.tar.gz
@@ -23,6 +23,7 @@ Patch3:		netkit-%{name}-includes.patch
 Patch4:		procps.patch
 Patch5:		nostrip.patch
 Patch6:		types.patch
+Patch7:		parallel-build.patch
 BuildRequires:	libtirpc-devel
 BuildRequires:	procps-devel >= 1:3.2.5-3
 BuildRequires:	rpcsvc-proto
@@ -129,6 +130,7 @@ Statystyki te zwykle są czytane komendą rup(1).
 %patch -P4 -p1
 %patch -P5 -p1
 %patch -P6 -p1
+%patch -P7 -p1
 
 %build
 CFLAGS="%{rpmcflags} -DGNU_LIBC -D_GNU_SOURCE -D_NO_UT_TIME -I/usr/include/tirpc" \

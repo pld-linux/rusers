@@ -1,0 +1,9 @@
+--- netkit-rusers-0.17/rpc.rusersd/Makefile.orig	2025-05-21 21:26:58.414893340 +0200
++++ netkit-rusers-0.17/rpc.rusersd/Makefile	2025-05-21 21:30:40.739965672 +0200
+@@ -40,5 +40,5 @@
+ rusers.h: $(RUSERSX) rusers.x
+ 	$(RPCGEN) -h -o rusers.h rusers.x
+ 
+-rusers_xdr.c: $(RUSERSX)
++rusers_xdr.c: $(RUSERSX) rusers.x
+ 	$(RPCGEN) -c -C -o rusers_xdr.c rusers.x
